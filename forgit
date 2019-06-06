@@ -18,6 +18,11 @@
             LOG.error(e.getMessage());
             Assert.assertNotNull(e);
 
+
 // new issue
+
+
+// second commit
+
         }
     }
