@@ -17,5 +17,7 @@
         } catch (WebDriverNull | IncorrectEnvironmentSetup | InterruptedException e) {
             LOG.error(e.getMessage());
             Assert.assertNotNull(e);
+
+// new issue
         }
     }
