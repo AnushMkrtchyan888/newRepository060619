@@ -1,0 +1,21 @@
+ @Test(description = "Verify clicking on Update on Checkout takes to Address edit page",
+    groups = {"physical","desktop-case:6140799"},dependsOnMethods = "verifyTheUserCanSelectSavedAddressInDropDownList")
+    @Util.UseAsTestRailId(testRailId = 6140799)
+    public void verifyClickingOnUpdateOnCheckoutTakesAddressEditPage(){
+        try {
+            this.checkoutPage.clickUpdateButtonInCheckoutPage();
+            this.checkoutPage.clickOnContinueButtonForChange();
+            this.checkoutPage.getAddressFieldFromShippingAddress().clear();
+            this.checkoutPage.inputShippingMethodAddress(CheckoutConstants.CheckoutPageShipingMethod.SHIPPING_CHANGED_ADDRESS.toString());
+            this.checkoutPage.checkTermsCheckbox();
+            this.checkoutPage.checkPrivacyPolicyCheckBox();
+            WaitActions.waitUntilElementIsVisible(BasePageFactory.getDriver(), Constants.MethodNames.cssSelector, CheckoutConstants.COMPLETE_ORDER_BUTTON_LOCATOR);
+            this.checkoutPage.clickOnCompleteOrderButton();
+            this.checkoutPage.addOpenFitRecoveryPhysicalProductFromShop();
+            Assert.assertTrue(this.checkoutPage.checkNewAddressIsAdded(CheckoutConstants.CheckoutPageShipingMethod.
+                    SHIPPING_CHANGED_ADDRESS.toString()));
+        } catch (WebDriverNull | IncorrectEnvironmentSetup | InterruptedException e) {
+            LOG.error(e.getMessage());
+            Assert.assertNotNull(e);
+        }
+    }
